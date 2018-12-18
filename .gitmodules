@@ -1,0 +1,3 @@
+[submodule "git/use-package"]
+	path = git/use-package
+	url = https://github.com/jwiegley/use-package.git
