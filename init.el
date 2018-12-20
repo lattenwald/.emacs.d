@@ -76,7 +76,7 @@
 
 ;;; show-paren-mode
 (setq show-paren-mode t
-      show-paren-style 'expression)
+      show-paren-style 'parenthesis)
 
 ;;; dired
 (setq dired-listing-switches "-al --group-directories-first")
