@@ -388,6 +388,10 @@
   :ensure t)
 ;;; /Org
 
+(use-package neotree
+  :bind ("C-f" . neotree-toggle)
+  :ensure t)
+
 (load "~/.emacs.d/staging.el")
 
 ;;; other
