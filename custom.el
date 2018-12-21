@@ -5,6 +5,9 @@
  ;; If there is more than one, they won't work right.
  '(electric-pair-mode t)
  '(indent-tabs-mode nil)
+ '(neo-show-hidden-files t)
+ '(neo-smart-open t)
+ '(neo-theme (quote nerd))
  '(notmuch-address-save-filename "~/.cache/notmuch-address-completion")
  '(notmuch-command "notmuch")
  '(notmuch-fcc-dirs "Sent")

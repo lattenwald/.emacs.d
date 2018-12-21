@@ -114,7 +114,8 @@
   :ensure t
   :pin melpa-stable
   :config
-  (add-hook 'after-init-hook 'projectile-global-mode))
+  (add-hook 'after-init-hook 'projectile-global-mode)
+  (setq projectile-switch-project-action 'neotree-projectile-action))
 
 (use-package ripgrep
   :ensure t)
