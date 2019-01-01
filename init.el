@@ -227,6 +227,7 @@
   (add-hook 'cperl-mode-hook 'flycheck-mode t)
   (add-hook 'purescript-mode-hook 'flycheck-mode t))
 
+;;; web-mode and stuff
 (use-package web-mode
   :ensure t
   :pin melpa-stable
@@ -261,6 +262,25 @@
                electric-pair-pairs
                (append electric-pair-pairs '((?% . ?%))))
               )))
+
+(use-package web-beautify
+  :ensure t
+  :config
+  (eval-after-load 'js2-mode
+    '(define-key js2-mode-map (kbd "C-c <tab>") 'web-beautify-js))
+  ;; Or if you're using 'js-mode' (a.k.a 'javascript-mode')
+  (eval-after-load 'js
+    '(define-key js-mode-map (kbd "C-c <tab>") 'web-beautify-js))
+
+  (eval-after-load 'json-mode
+    '(define-key json-mode-map (kbd "C-c <tab>") 'web-beautify-js))
+
+  (eval-after-load 'sgml-mode
+    '(define-key html-mode-map (kbd "C-c <tab>") 'web-beautify-html))
+
+  (eval-after-load 'css-mode
+    '(define-key css-mode-map (kbd "C-c <tab>") 'web-beautify-css)))
+;;; /web-mode
 
 (use-package gitignore-mode
   :ensure t
@@ -308,6 +328,7 @@
 ;;; lsp-mode
 (use-package lsp
   :ensure lsp-mode
+  :bind ("C-c <tab>" . lsp-format-buffer)
   :config
   (require 'lsp-clients)
   (setq lsp-auto-guess-root t
@@ -356,6 +377,9 @@
                     :server-id 'elixir-ls
                     :use-native-json t))
   (add-hook 'elixir-mode-hook 'lsp))
+
+(use-package elixir-yasnippets
+  :ensure t)
 ;;; /Elixir
 
 ;;; Haskell
