@@ -417,6 +417,11 @@
   :bind ("C-f" . neotree-toggle)
   :ensure t)
 
+(defun scratchpad-buffer ()
+  "Generate temporary buffer"
+  (interactive)
+  (switch-to-buffer (make-temp-name "scratch-")))
+
 (load "~/.emacs.d/staging.el")
 
 ;;; other
