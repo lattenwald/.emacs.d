@@ -370,6 +370,8 @@
 ;;; Elixir
 (use-package elixir-mode
   :ensure t
+  :bind (:map elixir-mode-map
+              ("C-c <tab>" . 'elixir-format))
   :config
   (lsp-register-client
    (make-lsp-client :new-connection (lsp-stdio-connection "~/elixir-ls/language_server.sh")
