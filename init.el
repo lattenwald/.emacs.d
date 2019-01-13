@@ -406,14 +406,25 @@
   (add-hook 'rust-mode-hook 'lsp))
 ;;; /Rust
 
-;;; Python
-
-;;; /Python
-
 ;;; Org
 (use-package org
   :ensure t)
 ;;; /Org
+
+;;; Perl
+(use-package cperl-mode
+  :ensure t
+  :init
+  (defalias 'perl-mode 'cperl-mode)
+  :config
+  (defvaralias 'cperl-indent-level 'tab-width)
+  (define-key cperl-mode-map (kbd "C-h f") 'cperl-perldoc)
+  (defadvice cperl-backward-to-start-of-continued-exp (after indentation-fix)
+    (and (not (memq char-after '(?\) ?\})))
+         (or (not is-block) (looking-back "^[ \t]+"))
+         (> (current-column) cperl-continued-statement-offset)
+         (backward-char cperl-continued-statement-offset))))
+;;; /Perl
 
 (use-package neotree
   :bind ("C-f" . neotree-toggle)
