@@ -1,3 +1,6 @@
 [submodule "git/use-package"]
 	path = git/use-package
 	url = https://github.com/jwiegley/use-package.git
+[submodule "git/bookmark-plus"]
+	path = git/bookmark-plus
+	url = https://github.com/emacsmirror/bookmark-plus.git

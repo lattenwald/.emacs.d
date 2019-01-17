@@ -97,6 +97,7 @@
 (package-initialize)
 
 (require 'use-package)
+(require 'bookmark+)
 
 ;;; packages
 
