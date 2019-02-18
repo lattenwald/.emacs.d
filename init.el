@@ -339,7 +339,7 @@
 (use-package lsp-ui
   :ensure t
   :bind (:map lsp-ui-mode-map
-              ("C-c i" . lsp-ui-imenu))
+              ("C-c C-i" . lsp-ui-imenu))
   :config
   (setq lsp-ui-flycheck-list-position 'right)
   (add-hook 'lsp-mode-hook 'lsp-ui-mode))
