@@ -375,7 +375,7 @@
               ("C-c <tab>" . 'elixir-format))
   :config
   (lsp-register-client
-   (make-lsp-client :new-connection (lsp-stdio-connection "~/elixir-ls/language_server.sh")
+   (make-lsp-client :new-connection (lsp-stdio-connection '("~/elixir-ls/language_server.sh"))
                     :major-modes '(elixir-mode)
                     :server-id 'elixir-ls
                     :use-native-json t))
