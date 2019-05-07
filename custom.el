@@ -4,6 +4,9 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(bmkp-last-as-first-bookmark-file "/home/qalex/.emacs.d/bookmarks")
+ '(custom-safe-themes
+   (quote
+    ("08141ce5483bc173c3503d9e3517fca2fb3229293c87dc05d49c4f3f5625e1df" "02199888a97767d7779269a39ba2e641d77661b31b3b8dd494b1a7250d1c8dc1" default)))
  '(electric-pair-mode t)
  '(erlang-electric-newline-inhibit t)
  '(flycheck-check-syntax-automatically (quote (save idle-change mode-enabled)))
@@ -28,10 +31,14 @@
      (:name "unread-monitoring" :query "tag:unread and tag:monitoring")
      (:name "unread-monitoring-not-einstein" :query "tag:unread and tag:monitoring and not subject:/einstein/")
      (:name "unread-monitoring-einstein" :query "tag:unread and tag:monitoring and subject:/einstein/"))))
+ '(org-modules
+   (quote
+    (org-bbdb org-bibtex org-docview org-info org-irc org-mhe org-rmail org-w3m org-notmuch org-toc)))
  '(org-replace-disputed-keys t)
  '(package-selected-packages
    (quote
-    (string-inflection lsp-mode protobuf-mode web-beautify elixir-yasnippets neotree lsp-python company-lsp lsp-rust rust-mode elixir-mode erlang lsp-ui notmuch lsp-haskell haskell-mode systemd textile-mode emojify yasnippet js2-mode vimrc-mode nginx-mode gitignore-mode web-mode flycheck magit-find-file magit yaml-mode undo-tree spaceline idomenu flx-ido fixmee markdown-mode apache-mode dockerfile-mode company projectile-ripgrep ripgrep projectile exec-path-from-shell diminish)))
+    (crontab-mode ess-R-data-view ess borland-blue-theme string-inflection lsp-mode protobuf-mode web-beautify elixir-yasnippets neotree lsp-python company-lsp lsp-rust rust-mode elixir-mode erlang lsp-ui notmuch lsp-haskell haskell-mode systemd textile-mode emojify yasnippet js2-mode vimrc-mode nginx-mode gitignore-mode web-mode flycheck magit-find-file magit yaml-mode undo-tree spaceline idomenu flx-ido fixmee markdown-mode apache-mode dockerfile-mode company projectile-ripgrep ripgrep projectile exec-path-from-shell diminish)))
+ '(send-mail-function (quote sendmail-send-it))
  '(show-paren-mode t)
  '(show-paren-style (quote parenthesis))
  '(tab-width 4)

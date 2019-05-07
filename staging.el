@@ -15,4 +15,16 @@
 (run-with-idle-timer 5 t #'garbage-collect)
 (setq garbage-collection-messages t)
 
+(use-package ess
+  :ensure t)
+
+(use-package ess-R-data-view
+  :ensure t)
+
+;; (use-package borland-blue-theme
+;;   :ensure t)
+
+(use-package crontab-mode
+  :ensure t)
+
 (message "loaded staging.el")
