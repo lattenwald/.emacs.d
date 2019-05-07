@@ -267,6 +267,8 @@
 (use-package web-beautify
   :ensure t
   :config
+  (add-hook 'js2-mode-hook 'lsp)
+
   (eval-after-load 'js2-mode
     '(define-key js2-mode-map (kbd "C-c <tab>") 'web-beautify-js))
   ;; Or if you're using 'js-mode' (a.k.a 'javascript-mode')
@@ -359,8 +361,7 @@
    (make-lsp-client :new-connection (lsp-stdio-connection '("erlang_ls" "-t" "stdio"))
                     ;; (make-lsp-client :new-connection (lsp-tcp-connection (lambda () "/usr/bin/true") "localhost" 9000)
                     :major-modes '(erlang-mode)
-                    :server-id 'erlang-ls
-                    :use-native-json t))
+                    :server-id 'erlang-ls))
   (add-hook 'erlang-mode-hook 'lsp)
   (add-hook 'erlang-mode-hook
             (lambda ()
@@ -377,8 +378,7 @@
   (lsp-register-client
    (make-lsp-client :new-connection (lsp-stdio-connection '("~/elixir-ls/language_server.sh"))
                     :major-modes '(elixir-mode)
-                    :server-id 'elixir-ls
-                    :use-native-json t))
+                    :server-id 'elixir-ls))
   (add-hook 'elixir-mode-hook 'lsp))
 
 (use-package elixir-yasnippets
@@ -409,7 +409,10 @@
 
 ;;; Org
 (use-package org
-  :ensure t)
+  :ensure t
+  :config
+  (eval-after-load "markdown-mode"
+    (protect-my-bindings org-mode-map)))
 ;;; /Org
 
 ;;; Perl
