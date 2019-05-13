@@ -349,7 +349,7 @@
 (use-package company-lsp
   :ensure t
   :config
-  (push 'company-lsp company-backends))
+  (cl-pushnew '(company-lsp company-dabbrev-code company-dabbrev company-keywords company-etags company-gtags) company-backends))
 
 ;;; Erlang
 ;; currently have to use https://github.com/klajo/sourcer, branch emacs-lsp-mode-stdio-fixes
@@ -411,8 +411,10 @@
 (use-package org
   :ensure t
   :config
-  (eval-after-load "markdown-mode"
-    (protect-my-bindings org-mode-map)))
+  (eval-after-load "org-mode"
+    (protect-my-bindings org-mode-map))
+  (setq org-catch-invisible-edits 'show-and-error
+        org-cycle-separator-lines 0))
 ;;; /Org
 
 ;;; Perl
