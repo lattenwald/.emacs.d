@@ -27,4 +27,7 @@
 (use-package crontab-mode
   :ensure t)
 
+(use-package lua-mode
+  :ensure t)
+
 (message "loaded staging.el")

@@ -362,6 +362,7 @@
                     ;; (make-lsp-client :new-connection (lsp-tcp-connection (lambda () "/usr/bin/true") "localhost" 9000)
                     :major-modes '(erlang-mode)
                     :server-id 'erlang-ls))
+  (add-to-list 'lsp-language-id-configuration '(erlang-mode . "erlang"))
   (add-hook 'erlang-mode-hook 'lsp)
   (add-hook 'erlang-mode-hook
             (lambda ()
