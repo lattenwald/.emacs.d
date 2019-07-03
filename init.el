@@ -148,7 +148,9 @@
 
 (use-package fixmee
   :ensure t
-  :diminish fixmee-mode)
+  :diminish fixmee-mode
+  :config
+  (global-fixmee-mode 1))
 
 (use-package flx-ido
   :ensure t)

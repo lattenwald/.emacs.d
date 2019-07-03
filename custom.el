@@ -11,6 +11,7 @@
  '(erlang-electric-newline-inhibit t)
  '(flycheck-check-syntax-automatically (quote (save idle-change mode-enabled)))
  '(indent-tabs-mode nil)
+ '(js-indent-level 2)
  '(lsp-ui-flycheck-live-reporting nil)
  '(lsp-ui-imenu-kind-position (quote left))
  '(neo-show-hidden-files t)
