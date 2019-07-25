@@ -52,6 +52,9 @@
 (let ((default-directory  "~/.emacs.d/git/"))
   (normal-top-level-add-subdirs-to-load-path))
 
+;; treat underscore as word character
+(modify-syntax-entry ?_ "w")
+
 ;;; cua-mode
 (cua-mode t)
 (transient-mark-mode t)
@@ -114,8 +117,8 @@
 (use-package projectile
   :ensure t
   :pin melpa-stable
+  :hook (after-init . projectile-global-mode)
   :config
-  (add-hook 'after-init-hook 'projectile-global-mode)
   (setq projectile-switch-project-action 'neotree-projectile-action))
 
 (use-package ripgrep
@@ -129,8 +132,7 @@
   :ensure t
   :pin melpa-stable
   :diminish company-mode
-  :config
-  (add-hook 'after-init-hook 'global-company-mode))
+  :hook (after-init . global-company-mode))
 
 (use-package dockerfile-mode
   :ensure t
@@ -148,9 +150,7 @@
 
 (use-package fixmee
   :ensure t
-  :diminish fixmee-mode
-  :config
-  (global-fixmee-mode 1))
+  :diminish fixmee-mode)
 
 (use-package flx-ido
   :ensure t)
@@ -179,9 +179,8 @@
 
 (use-package whitespace
   :diminish global-whitespace-mode
+  :hook (before-save . whitespace-cleanup)
   :config
-  (add-hook 'before-save-hook 'whitespace-cleanup)
-
   (defun prevent-whitespace-mode-for-magit ()
     (not (derived-mode-p 'magit-mode)))
   (add-function :before-while whitespace-enable-predicate 'prevent-whitespace-mode-for-magit)
@@ -206,9 +205,7 @@
   (global-undo-tree-mode t))
 
 (use-package yaml-mode
-  :ensure t
-  :config
-  (add-hook 'yaml-mode-hook 'flycheck-mode))
+  :ensure t)
 
 (use-package magit
   :ensure t)
@@ -226,14 +223,30 @@
 (use-package flycheck
   :ensure t
   :pin melpa-stable
-  :config
-  (add-hook 'cperl-mode-hook 'flycheck-mode t)
-  (add-hook 'purescript-mode-hook 'flycheck-mode t))
+  :hook (yaml-mode cperl-mode purescript-mode))
 
 ;;; web-mode and stuff
 (use-package web-mode
   :ensure t
   :pin melpa-stable
+  :hook ((web-mode . (lambda ()
+                       (when (equal web-mode-content-type "jsx")
+                         ;; enable flycheck
+                         (flycheck-select-checker 'jsxhint-checker)
+                         (flycheck-mode))
+                       (setq web-mode-enable-auto-pairing nil)
+                       (setq-local
+                        electric-pair-pairs
+                        (append electric-pair-pairs '((?% . ?%))))
+                       ))
+         (flycheck-mode . (lambda ()
+                            (flycheck-define-checker jsxhint-checker
+                                                     "A JSX syntax and style checker based on JSXHint."
+
+                                                     :command ("jsxhint" source)
+                                                     :error-patterns
+                                                     ((error line-start (1+ nonl) ": line " line ", col " column ", " (message) line-end))
+                                                     :modes (web-mode)))))
   :config
   ;;; web-mode
   (add-to-list 'auto-mode-alist '("\\.html?$" . web-mode))
@@ -246,30 +259,11 @@
     (if (equal web-mode-content-type "jsx")
         (let ((web-mode-enable-part-face nil))
           ad-do-it)
-      ad-do-it))
-  (flycheck-define-checker jsxhint-checker
-    "A JSX syntax and style checker based on JSXHint."
-
-    :command ("jsxhint" source)
-    :error-patterns
-    ((error line-start (1+ nonl) ": line " line ", col " column ", " (message) line-end))
-    :modes (web-mode))
-  (add-hook 'web-mode-hook
-            (lambda ()
-              (when (equal web-mode-content-type "jsx")
-                ;; enable flycheck
-                (flycheck-select-checker 'jsxhint-checker)
-                (flycheck-mode))
-              (setq web-mode-enable-auto-pairing nil)
-              (setq-local
-               electric-pair-pairs
-               (append electric-pair-pairs '((?% . ?%))))
-              )))
+      ad-do-it)))
 
 (use-package web-beautify
   :ensure t
   :config
-  (add-hook 'js2-mode-hook 'lsp)
 
   (eval-after-load 'js2-mode
     '(define-key js2-mode-map (kbd "C-c <tab>") 'web-beautify-js))
@@ -302,21 +296,20 @@
 
 (use-package js2-mode
   :ensure t
+  :hook ((js2 . lsp)
+         (js2 . (lambda ()
+                  (setq tab-width 2)
+                  (setq indent-tabs-mode t))))
   :config
   (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
-  (add-to-list 'interpreter-mode-alist '("node" . js2-mode))
-  (add-hook 'js2-mode (lambda ()
-                        (setq tab-width 2)
-                        (setq indent-tabs-mode t))))
+  (add-to-list 'interpreter-mode-alist '("node" . js2-mode)))
 
 (use-package yasnippet
   :ensure t
   :pin melpa-stable
+  :hook (elm-mode . (lambda () (set (make-local-variable 'yas-indent-line) 'fixed)))
   :config
-  (yas-global-mode 1)
-  (add-hook 'elm-mode-hook
-            '(lambda () (set (make-local-variable 'yas-indent-line) 'fixed)))
-  )
+  (yas-global-mode 1))
 
 (use-package emojify
   :ensure t)
@@ -344,9 +337,9 @@
   :ensure t
   :bind (:map lsp-ui-mode-map
               ("C-c C-i" . lsp-ui-imenu))
+  :hook lsp-mode
   :config
-  (setq lsp-ui-flycheck-list-position 'right)
-  (add-hook 'lsp-mode-hook 'lsp-ui-mode))
+  (setq lsp-ui-flycheck-list-position 'right))
 
 (use-package company-lsp
   :ensure t
@@ -357,19 +350,15 @@
 ;; currently have to use https://github.com/klajo/sourcer, branch emacs-lsp-mode-stdio-fixes
 (use-package erlang
   :ensure t
+  :hook ((erlang-mode . lsp)
+         (erlang-mode . (lambda () (setq lsp-enable-indentation nil))))
   :config
-
   (lsp-register-client
    (make-lsp-client :new-connection (lsp-stdio-connection '("erlang_ls" "-t" "stdio"))
                     ;; (make-lsp-client :new-connection (lsp-tcp-connection (lambda () "/usr/bin/true") "localhost" 9000)
                     :major-modes '(erlang-mode)
                     :server-id 'erlang-ls))
-  (add-to-list 'lsp-language-id-configuration '(erlang-mode . "erlang"))
-  (add-hook 'erlang-mode-hook 'lsp)
-  (add-hook 'erlang-mode-hook
-            (lambda ()
-              (setq lsp-enable-indentation nil)))
-  )
+  (add-to-list 'lsp-language-id-configuration '(erlang-mode . "erlang")))
 ;;; /Erlang
 
 ;;; Elixir
@@ -377,12 +366,12 @@
   :ensure t
   :bind (:map elixir-mode-map
               ("C-c <tab>" . 'elixir-format))
+  :hook (elixir-mode . lsp)
   :config
   (lsp-register-client
    (make-lsp-client :new-connection (lsp-stdio-connection '("~/elixir-ls/language_server.sh"))
                     :major-modes '(elixir-mode)
-                    :server-id 'elixir-ls))
-  (add-hook 'elixir-mode-hook 'lsp))
+                    :server-id 'elixir-ls)))
 
 (use-package elixir-yasnippets
   :ensure t)
@@ -395,9 +384,9 @@
 ;; see https://github.com/emacs-lsp/lsp-haskell
 (use-package lsp-haskell
   :ensure t
+  :hook (haskell-mode . lsp)
   :config
-  (setq lsp-haskell-process-path-hie "hie-wrapper")
-  (add-hook 'haskell-mode-hook 'lsp))
+  (setq lsp-haskell-process-path-hie "hie-wrapper"))
 ;;; /Haskell
 
 ;;; Rust
@@ -406,8 +395,7 @@
 
 (use-package lsp-rust
   :ensure t
-  :config
-  (add-hook 'rust-mode-hook 'lsp))
+  :hook (rust-mode . lsp))
 ;;; /Rust
 
 ;;; Org
@@ -421,6 +409,11 @@
 ;;; /Org
 
 ;;; Perl
+(use-package perlbrew
+  :ensure t
+  :config
+  (perlbrew-use "perl-5.30.0"))
+
 (use-package cperl-mode
   :ensure t
   :init
