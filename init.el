@@ -109,17 +109,18 @@
 
 (use-package exec-path-from-shell
   :ensure t
+  :custom
+  (exec-path-from-shell-arguments '("-l"))
+  (exec-path-from-shell-variables '("PATH" "MANPATH"))
   :config
-  (setq exec-path-from-shell-arguments '("-l")
-        exec-path-from-shell-variables '("PATH" "MANPATH"))
   (exec-path-from-shell-initialize))
 
 (use-package projectile
   :ensure t
   :pin melpa-stable
   :hook (after-init . projectile-global-mode)
-  :config
-  (setq projectile-switch-project-action 'neotree-projectile-action))
+  :custom
+  (projectile-switch-project-action 'neotree-projectile-action))
 
 (use-package ripgrep
   :ensure t)
@@ -200,8 +201,9 @@
   :bind
   ("C-r" . undo-tree-redo)
   ("C-z" . undo)
+  :custom
+  (undo-tree-enable-undo-in-region nil)
   :config
-  (setq undo-tree-enable-undo-in-region nil)
   (global-undo-tree-mode t))
 
 (use-package yaml-mode
@@ -229,12 +231,13 @@
 (use-package web-mode
   :ensure t
   :pin melpa-stable
+  :custom
+  (web-mode-enable-auto-pairing nil)
   :hook ((web-mode . (lambda ()
                        (when (equal web-mode-content-type "jsx")
                          ;; enable flycheck
                          (flycheck-select-checker 'jsxhint-checker)
                          (flycheck-mode))
-                       (setq web-mode-enable-auto-pairing nil)
                        (setq-local
                         electric-pair-pairs
                         (append electric-pair-pairs '((?% . ?%))))
@@ -327,19 +330,26 @@
 (use-package lsp
   :ensure lsp-mode
   :bind ("C-c <tab>" . lsp-format-buffer)
+  :custom
+  (lsp-auto-guess-root t)
+  (lsp-prefer-flymake nil)
+  (lsp-print-io t)
   :config
   (require 'lsp-clients)
-  (setq lsp-auto-guess-root t
-        lsp-prefer-flymake nil
-        lsp-print-io t))
+  (lsp-register-client
+   (make-lsp-client :new-connection (lsp-stdio-connection '("erlang_ls" "-t" "stdio"))
+                    ;; (make-lsp-client :new-connection (lsp-tcp-connection (lambda () "/usr/bin/true") "localhost" 9000)
+                    :major-modes '(erlang-mode)
+                    :server-id 'erlang-ls))
+  (add-to-list 'lsp-language-id-configuration '(erlang-mode . "erlang")))
 
 (use-package lsp-ui
   :ensure t
   :bind (:map lsp-ui-mode-map
               ("C-c C-i" . lsp-ui-imenu))
-  :hook lsp-mode
-  :config
-  (setq lsp-ui-flycheck-list-position 'right))
+  :hook lsp
+  :custom
+  (lsp-ui-flycheck-list-position 'right))
 
 (use-package company-lsp
   :ensure t
@@ -353,12 +363,7 @@
   :hook ((erlang-mode . lsp)
          (erlang-mode . (lambda () (setq lsp-enable-indentation nil))))
   :config
-  (lsp-register-client
-   (make-lsp-client :new-connection (lsp-stdio-connection '("erlang_ls" "-t" "stdio"))
-                    ;; (make-lsp-client :new-connection (lsp-tcp-connection (lambda () "/usr/bin/true") "localhost" 9000)
-                    :major-modes '(erlang-mode)
-                    :server-id 'erlang-ls))
-  (add-to-list 'lsp-language-id-configuration '(erlang-mode . "erlang")))
+  )
 ;;; /Erlang
 
 ;;; Elixir
@@ -385,8 +390,8 @@
 (use-package lsp-haskell
   :ensure t
   :hook (haskell-mode . lsp)
-  :config
-  (setq lsp-haskell-process-path-hie "hie-wrapper"))
+  :custom
+  (lsp-haskell-process-path-hie "hie-wrapper"))
 ;;; /Haskell
 
 ;;; Rust
@@ -401,11 +406,12 @@
 ;;; Org
 (use-package org
   :ensure t
+  :custom
+  (org-catch-invisible-edits 'show-and-error)
+  (org-cycle-separator-lines 0)
   :config
   (eval-after-load "org-mode"
-    (protect-my-bindings org-mode-map))
-  (setq org-catch-invisible-edits 'show-and-error
-        org-cycle-separator-lines 0))
+    (protect-my-bindings org-mode-map)))
 ;;; /Org
 
 ;;; Perl
