@@ -330,18 +330,22 @@
 (use-package lsp
   :ensure lsp-mode
   :bind ("C-c <tab>" . lsp-format-buffer)
+  ;; :hook lsp-ui-mode
   :custom
   (lsp-auto-guess-root t)
   (lsp-prefer-flymake nil)
   (lsp-print-io t)
   :config
   (require 'lsp-clients)
-  (lsp-register-client
-   (make-lsp-client :new-connection (lsp-stdio-connection '("erlang_ls" "-t" "stdio"))
-                    ;; (make-lsp-client :new-connection (lsp-tcp-connection (lambda () "/usr/bin/true") "localhost" 9000)
-                    :major-modes '(erlang-mode)
-                    :server-id 'erlang-ls))
-  (add-to-list 'lsp-language-id-configuration '(erlang-mode . "erlang")))
+  (setq lsp-erlang-server-install-dir "/home/qalex/git/erlang_ls")
+  ;; (setq lsp-erlang-server-install-dir "/home/qalex/git/sourcer")
+  ;; (lsp-register-client
+  ;;  (make-lsp-client :new-connection (lsp-stdio-connection '("erlang_ls" "-t" "stdio"))
+  ;;                   ;; (make-lsp-client :new-connection (lsp-tcp-connection (lambda () "/usr/bin/true") "localhost" 9000)
+  ;;                   :major-modes '(erlang-mode)
+  ;;                   :server-id 'erlang-ls))
+  (add-to-list 'lsp-language-id-configuration '(erlang-mode . "erlang"))
+  )
 
 (use-package lsp-ui
   :ensure t

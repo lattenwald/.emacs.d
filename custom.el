@@ -12,6 +12,8 @@
  '(flycheck-check-syntax-automatically (quote (save idle-change mode-enabled)))
  '(indent-tabs-mode nil)
  '(js-indent-level 2)
+ '(lsp-auto-guess-root t nil nil "Customized with use-package lsp")
+ '(lsp-ui-flycheck-enable t)
  '(lsp-ui-flycheck-live-reporting nil)
  '(lsp-ui-imenu-kind-position (quote left))
  '(message-strip-special-text-properties nil)
