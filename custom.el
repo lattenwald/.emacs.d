@@ -14,6 +14,7 @@
  '(js-indent-level 2)
  '(lsp-ui-flycheck-live-reporting nil)
  '(lsp-ui-imenu-kind-position (quote left))
+ '(message-strip-special-text-properties nil)
  '(neo-show-hidden-files t)
  '(neo-smart-open t)
  '(neo-theme (quote nerd))
@@ -40,7 +41,7 @@
  '(org-src-tab-acts-natively t)
  '(package-selected-packages
    (quote
-    (lua-mode crontab-mode ess-R-data-view ess borland-blue-theme string-inflection lsp-mode protobuf-mode web-beautify elixir-yasnippets neotree lsp-python company-lsp lsp-rust rust-mode elixir-mode erlang lsp-ui notmuch lsp-haskell haskell-mode systemd textile-mode emojify yasnippet js2-mode vimrc-mode nginx-mode gitignore-mode web-mode flycheck magit-find-file magit yaml-mode undo-tree spaceline idomenu flx-ido fixmee markdown-mode apache-mode dockerfile-mode company projectile-ripgrep ripgrep projectile exec-path-from-shell diminish)))
+    (perlbrew lua-mode crontab-mode ess-R-data-view ess borland-blue-theme string-inflection lsp-mode protobuf-mode web-beautify elixir-yasnippets neotree lsp-python company-lsp lsp-rust rust-mode elixir-mode erlang lsp-ui notmuch lsp-haskell haskell-mode systemd textile-mode emojify yasnippet js2-mode vimrc-mode nginx-mode gitignore-mode web-mode flycheck magit-find-file magit yaml-mode undo-tree spaceline idomenu flx-ido fixmee markdown-mode apache-mode dockerfile-mode company projectile-ripgrep ripgrep projectile exec-path-from-shell diminish)))
  '(send-mail-function (quote sendmail-send-it))
  '(show-paren-mode t)
  '(show-paren-style (quote parenthesis))
@@ -52,4 +53,5 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(cperl-array-face ((t (:inherit font-lock-variable-name-face :weight bold))))
+ '(cperl-hash-face ((t (:inherit font-lock-variable-name-face :weight bold)))))
