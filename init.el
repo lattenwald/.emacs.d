@@ -127,7 +127,7 @@
 
 (use-package projectile-ripgrep
   :ensure t
-  :bind (("C-c p s r" . projectile-ripgrep)))
+  :bind ("C-c p s r" . projectile-ripgrep))
 
 (use-package company
   :ensure t
@@ -158,7 +158,8 @@
 
 (use-package idomenu
   :ensure t
-  :bind ("C-c i" . idomenu)
+  :bind
+  ("C-c i" . idomenu)
   :config
   (ido-mode t)
   (ido-everywhere 1))
@@ -335,22 +336,17 @@
   (lsp-auto-guess-root t)
   (lsp-prefer-flymake nil)
   (lsp-print-io t)
+  (lsp-erlang-server-install-dir "/home/qalex/git/erlang_ls")
   :config
-  (require 'lsp-clients)
-  (setq lsp-erlang-server-install-dir "/home/qalex/git/erlang_ls")
-  ;; (setq lsp-erlang-server-install-dir "/home/qalex/git/sourcer")
-  ;; (lsp-register-client
-  ;;  (make-lsp-client :new-connection (lsp-stdio-connection '("erlang_ls" "-t" "stdio"))
-  ;;                   ;; (make-lsp-client :new-connection (lsp-tcp-connection (lambda () "/usr/bin/true") "localhost" 9000)
-  ;;                   :major-modes '(erlang-mode)
-  ;;                   :server-id 'erlang-ls))
-  (add-to-list 'lsp-language-id-configuration '(erlang-mode . "erlang"))
-  )
+  (require 'lsp-clients))
 
 (use-package lsp-ui
   :ensure t
   :bind (:map lsp-ui-mode-map
-              ("C-c C-i" . lsp-ui-imenu))
+              ("C-c C-i" . lsp-ui-imenu)
+              :map lsp-ui-imenu-mode-map
+              ("<M-return>" . lsp-ui-imenu--view)
+              ("<return>" . lsp-ui-imenu--visit))
   :hook lsp
   :custom
   (lsp-ui-flycheck-list-position 'right))

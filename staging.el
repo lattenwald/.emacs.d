@@ -30,4 +30,7 @@
 (use-package lua-mode
   :ensure t)
 
+(use-package vterm
+  :ensure t)
+
 (message "loaded staging.el")
