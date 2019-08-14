@@ -33,4 +33,7 @@
 (use-package vterm
   :ensure t)
 
+(use-package yasnippet-snippets
+  :ensure t)
+
 (message "loaded staging.el")
