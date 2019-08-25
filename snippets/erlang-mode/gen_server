@@ -1,0 +1,29 @@
+# -*- mode: snippet -*-
+# name: gen_server
+# key: gen_server
+# --
+-behaviour(gen_server).
+-export([init/1, handle_info/2, handle_cast/2, handle_call/3, code_change/3, terminate/2]).
+$0
+
+%%====================================================================
+%% gen_server API
+%%====================================================================
+
+init(_) ->
+    {ok, []}.
+
+handle_call(_Msg, _From, State) ->
+    {reply, ok, State}.
+
+handle_cast(_Msg, State) ->
+    {noreply, State}.
+
+handle_info(_Msg, State) ->
+    {noreply, State}.
+
+code_change(_OldVsn, State, _Extra) ->
+    {ok, State}.
+
+terminate(_Reason, _State) ->
+    ok.

@@ -7,6 +7,7 @@
  '(custom-safe-themes
    (quote
     ("08141ce5483bc173c3503d9e3517fca2fb3229293c87dc05d49c4f3f5625e1df" "02199888a97767d7779269a39ba2e641d77661b31b3b8dd494b1a7250d1c8dc1" default)))
+ '(delete-selection-mode t)
  '(electric-pair-mode t)
  '(erlang-electric-newline-inhibit t)
  '(flycheck-check-syntax-automatically (quote (save idle-change mode-enabled)))
@@ -30,12 +31,16 @@
     ((:name "inbox" :query "tag:inbox" :key "i")
      (:name "unread" :query "tag:unread" :key "u")
      (:name "flagged" :query "tag:flagged" :key "f")
-     (:name "sent" :query "tag:sent" :key "t")
      (:name "drafts" :query "tag:draft" :key "d")
      (:name "all mail" :query "*" :key "a")
      (:name "unread-monitoring" :query "tag:unread and tag:monitoring")
      (:name "unread-monitoring-not-einstein" :query "tag:unread and tag:monitoring and not subject:/einstein/")
-     (:name "unread-monitoring-einstein" :query "tag:unread and tag:monitoring and subject:/einstein/"))))
+     (:name "unread-monitoring-einstein" :query "tag:unread and tag:monitoring and subject:/einstein/")
+     (:name "redmine" :query "tag:redmine")
+     (:name "cron" :query "tag:cron")
+     (:name "monitoring" :query "tag:monitoring")
+     (:name "sent" :query "tag:sent")
+     (:name "me@lattenwald.org" :query "tag:me@lattenwald.org"))))
  '(org-modules
    (quote
     (org-bbdb org-bibtex org-docview org-info org-irc org-mhe org-rmail org-w3m org-notmuch org-toc)))
@@ -48,7 +53,7 @@
  '(show-paren-mode t)
  '(show-paren-style (quote parenthesis))
  '(tab-width 4)
- '(tramp-use-ssh-controlmaster-options nil nil (tramp))
+ '(tramp-use-ssh-controlmaster-options nil)
  '(x-stretch-cursor t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
