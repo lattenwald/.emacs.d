@@ -29,18 +29,17 @@
  '(notmuch-saved-searches
    (quote
     ((:name "inbox" :query "tag:inbox" :key "i")
-     (:name "unread" :query "tag:unread" :key "u")
+     (:name "unread" :query "tag:unread and not tag:monitoring" :key "u")
      (:name "flagged" :query "tag:flagged" :key "f")
      (:name "drafts" :query "tag:draft" :key "d")
      (:name "all mail" :query "*" :key "a")
-     (:name "unread-monitoring" :query "tag:unread and tag:monitoring")
-     (:name "unread-monitoring-not-einstein" :query "tag:unread and tag:monitoring and not subject:/einstein/")
      (:name "unread-monitoring-einstein" :query "tag:unread and tag:monitoring and subject:/einstein/")
      (:name "redmine" :query "tag:redmine")
      (:name "cron" :query "tag:cron")
      (:name "monitoring" :query "tag:monitoring")
      (:name "sent" :query "tag:sent")
-     (:name "me@lattenwald.org" :query "tag:me@lattenwald.org"))))
+     (:name "me@lattenwald.org" :query "to:me@lattenwald.org and tag:unread")
+     (:name "unread-monitoring" :query "tag:unread and tag:monitoring and not subject:/einstein/"))))
  '(org-modules
    (quote
     (org-bbdb org-bibtex org-docview org-info org-irc org-mhe org-rmail org-w3m org-notmuch org-toc)))
