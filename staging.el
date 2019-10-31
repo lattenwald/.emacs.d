@@ -36,4 +36,8 @@
 (use-package yasnippet-snippets
   :ensure t)
 
+(use-package gnus
+  :config
+  (setq gnus-select-method '(nntp "news.tweaknews.eu")))
+
 (message "loaded staging.el")
