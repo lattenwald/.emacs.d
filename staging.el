@@ -37,7 +37,7 @@
   :ensure t)
 
 (use-package gnus
-  :config
-  (setq gnus-select-method '(nntp "news.tweaknews.eu")))
+  :custom
+  (gnus-select-method '(nntp "news.tweaknews.eu")))
 
 (message "loaded staging.el")
