@@ -8,12 +8,14 @@
    (quote
     ("08141ce5483bc173c3503d9e3517fca2fb3229293c87dc05d49c4f3f5625e1df" "02199888a97767d7779269a39ba2e641d77661b31b3b8dd494b1a7250d1c8dc1" default)))
  '(delete-selection-mode t)
+ '(display-line-numbers t)
  '(electric-pair-mode t)
  '(erlang-electric-newline-inhibit t)
  '(flycheck-check-syntax-automatically (quote (save idle-change mode-enabled)))
  '(indent-tabs-mode nil)
  '(js-indent-level 2)
  '(lsp-auto-guess-root t nil nil "Customized with use-package lsp")
+ '(lsp-clients-javascript-typescript-server "~/.node_modules/bin/javascript-typescript-stdio")
  '(lsp-ui-flycheck-enable t)
  '(lsp-ui-flycheck-live-reporting nil)
  '(lsp-ui-imenu-kind-position (quote left))
@@ -47,7 +49,7 @@
  '(org-src-tab-acts-natively t)
  '(package-selected-packages
    (quote
-    (yasnippet-snippets vterm perlbrew lua-mode crontab-mode ess-R-data-view ess borland-blue-theme string-inflection lsp-mode protobuf-mode web-beautify elixir-yasnippets neotree lsp-python company-lsp lsp-rust rust-mode elixir-mode erlang lsp-ui notmuch lsp-haskell haskell-mode systemd textile-mode emojify yasnippet js2-mode vimrc-mode nginx-mode gitignore-mode web-mode flycheck magit-find-file magit yaml-mode undo-tree spaceline idomenu flx-ido fixmee markdown-mode apache-mode dockerfile-mode company projectile-ripgrep ripgrep projectile exec-path-from-shell diminish)))
+    (smali-mode smali quelpa-use-package quelpa treemacs-projectile treemacs yasnippet-snippets vterm perlbrew lua-mode crontab-mode ess-R-data-view ess borland-blue-theme string-inflection lsp-mode protobuf-mode web-beautify elixir-yasnippets lsp-python company-lsp lsp-rust rust-mode elixir-mode erlang lsp-ui notmuch lsp-haskell haskell-mode systemd textile-mode emojify yasnippet js2-mode vimrc-mode nginx-mode gitignore-mode web-mode flycheck magit-find-file magit yaml-mode undo-tree spaceline idomenu flx-ido fixmee markdown-mode apache-mode dockerfile-mode company projectile-ripgrep ripgrep projectile exec-path-from-shell diminish)))
  '(send-mail-function (quote sendmail-send-it))
  '(show-paren-mode t)
  '(show-paren-style (quote parenthesis))

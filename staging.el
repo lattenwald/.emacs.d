@@ -36,8 +36,14 @@
 (use-package yasnippet-snippets
   :ensure t)
 
-(use-package gnus
-  :custom
-  (gnus-select-method '(nntp "news.tweaknews.eu")))
+(use-package quelpa
+  :ensure t)
+
+(use-package quelpa-use-package
+  :ensure t)
+
+(use-package smali-mode
+  :ensure t
+  :quelpa (smali-mode :fetcher github :repo "strazzere/Emacs-Smali"))
 
 (message "loaded staging.el")

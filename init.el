@@ -118,9 +118,7 @@
 (use-package projectile
   :ensure t
   :pin melpa-stable
-  :hook (after-init . projectile-global-mode)
-  :custom
-  (projectile-switch-project-action 'neotree-projectile-action))
+  :hook (after-init . projectile-global-mode))
 
 (use-package ripgrep
   :ensure t)
@@ -217,11 +215,6 @@
   :ensure t
   :bind
   ("C-c C-f" . magit-find-file-completing-read))
-
-(use-package linum
-  :ensure t
-  :config
-  (global-linum-mode t))
 
 (use-package flycheck
   :ensure t
@@ -336,7 +329,7 @@
   (lsp-auto-guess-root t)
   (lsp-prefer-flymake nil)
   (lsp-print-io t)
-  (lsp-erlang-server-install-dir "/home/qalex/git/erlang_ls")
+  ;; (lsp-erlang-server-install-dir "/home/qalex/git/erlang_ls")
   :config
   (require 'lsp-clients))
 
@@ -434,8 +427,19 @@
          (backward-char cperl-continued-statement-offset))))
 ;;; /Perl
 
-(use-package neotree
-  :bind ("C-f" . neotree-toggle)
+(use-package gnus
+  :custom
+  (gnus-select-method '(nntp "news.tweaknews.eu"))
+  :config
+  (eval-after-load "gnus-mode"
+    (protect-my-bindings gnus-summary-mode-map)))
+
+(use-package treemacs
+  :ensure t
+  :config
+  (add-hook treemacs-mode-hook (lambda() (display-line-numbers-mode 0))))
+
+(use-package treemacs-projectile
   :ensure t)
 
 (defun scratchpad-buffer ()
