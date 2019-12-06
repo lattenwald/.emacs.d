@@ -49,7 +49,7 @@
  '(org-src-tab-acts-natively t)
  '(package-selected-packages
    (quote
-    (smali-mode smali quelpa-use-package quelpa treemacs-projectile treemacs yasnippet-snippets vterm perlbrew lua-mode crontab-mode ess-R-data-view ess borland-blue-theme string-inflection lsp-mode protobuf-mode web-beautify elixir-yasnippets lsp-python company-lsp lsp-rust rust-mode elixir-mode erlang lsp-ui notmuch lsp-haskell haskell-mode systemd textile-mode emojify yasnippet js2-mode vimrc-mode nginx-mode gitignore-mode web-mode flycheck magit-find-file magit yaml-mode undo-tree spaceline idomenu flx-ido fixmee markdown-mode apache-mode dockerfile-mode company projectile-ripgrep ripgrep projectile exec-path-from-shell diminish)))
+    (lsp-rust smali-mode smali quelpa-use-package quelpa treemacs-projectile treemacs yasnippet-snippets vterm perlbrew lua-mode crontab-mode ess-R-data-view ess borland-blue-theme string-inflection lsp-mode protobuf-mode web-beautify elixir-yasnippets lsp-python company-lsp rust-mode elixir-mode erlang lsp-ui notmuch lsp-haskell haskell-mode systemd textile-mode emojify yasnippet js2-mode vimrc-mode nginx-mode gitignore-mode web-mode flycheck magit-find-file magit yaml-mode undo-tree spaceline idomenu flx-ido fixmee markdown-mode apache-mode dockerfile-mode company projectile-ripgrep ripgrep projectile exec-path-from-shell diminish)))
  '(send-mail-function (quote sendmail-send-it))
  '(show-paren-mode t)
  '(show-paren-style (quote parenthesis))

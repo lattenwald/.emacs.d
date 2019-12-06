@@ -328,7 +328,7 @@
   :custom
   (lsp-auto-guess-root t)
   (lsp-prefer-flymake nil)
-  (lsp-print-io t)
+  (lsp-log-io nil)
   ;; (lsp-erlang-server-install-dir "/home/qalex/git/erlang_ls")
   :config
   (require 'lsp-clients))
@@ -390,10 +390,6 @@
 ;;; Rust
 (use-package rust-mode
   :ensure t)
-
-(use-package lsp-rust
-  :ensure t
-  :hook (rust-mode . lsp))
 ;;; /Rust
 
 ;;; Org
@@ -436,8 +432,8 @@
 
 (use-package treemacs
   :ensure t
-  :config
-  (add-hook treemacs-mode-hook (lambda() (display-line-numbers-mode 0))))
+  :init
+  (add-hook 'treemacs-mode-hook (lambda() (display-line-numbers-mode 0))))
 
 (use-package treemacs-projectile
   :ensure t)
