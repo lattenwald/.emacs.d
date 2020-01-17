@@ -55,6 +55,8 @@
  '(show-paren-style (quote parenthesis))
  '(tab-width 4)
  '(tramp-use-ssh-controlmaster-options nil)
+ '(web-mode-code-indent-offset 2)
+ '(web-mode-enable-auto-pairing nil nil nil "Customized with use-package web-mode")
  '(x-stretch-cursor t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

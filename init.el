@@ -324,14 +324,15 @@
 (use-package lsp
   :ensure lsp-mode
   :bind ("C-c <tab>" . lsp-format-buffer)
-  ;; :hook lsp-ui-mode
   :custom
   (lsp-auto-guess-root t)
   (lsp-prefer-flymake nil)
   (lsp-log-io nil)
   ;; (lsp-erlang-server-install-dir "/home/qalex/git/erlang_ls")
   :config
-  (require 'lsp-clients))
+  (require 'lsp-clients)
+  (add-hook 'c++-mode-hook #'lsp)
+  (add-hook 'c-mode-hook #'lsp))
 
 (use-package lsp-ui
   :ensure t
@@ -353,10 +354,8 @@
 ;; currently have to use https://github.com/klajo/sourcer, branch emacs-lsp-mode-stdio-fixes
 (use-package erlang
   :ensure t
-  :hook ((erlang-mode . lsp)
-         (erlang-mode . (lambda () (setq lsp-enable-indentation nil))))
   :config
-  )
+  (add-hook 'erlang-mode-hook #'lsp))
 ;;; /Erlang
 
 ;;; Elixir
