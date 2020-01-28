@@ -115,17 +115,27 @@
   :config
   (exec-path-from-shell-initialize))
 
+(use-package rg
+  :ensure t
+  :config
+  (rg-define-search rg-proj
+    "Run ripgrep in current project searching for REGEXP in FILES.
+The project root will will be determined by either common project
+packages like projectile and `find-file-in-project' or the source
+version control system. Search will be conducted in files matching
+the current file."
+    :query ask
+    :confirm prefix
+    :dir project
+    :files current)
+  (add-hook 'projectile-mode-hook (lambda () (define-key projectile-command-map (kbd "s r") 'rg-proj))))
+
 (use-package projectile
   :ensure t
   :pin melpa-stable
+  :custom
+  (projectile-keymap-prefix (kbd "C-c p"))
   :hook (after-init . projectile-global-mode))
-
-(use-package ripgrep
-  :ensure t)
-
-(use-package projectile-ripgrep
-  :ensure t
-  :bind ("C-c p s r" . projectile-ripgrep))
 
 (use-package company
   :ensure t
@@ -431,6 +441,7 @@
 
 (use-package treemacs
   :ensure t
+  :bind ("C-f" . treemacs)
   :init
   (add-hook 'treemacs-mode-hook (lambda() (display-line-numbers-mode 0))))
 
