@@ -328,7 +328,15 @@ the current file."
   :ensure t)
 
 (use-package notmuch
-  :ensure t)
+  :ensure ;TODO:
+  :bind (:map notmuch-search-mode-map
+              ("<mouse-8>" . notmuch-bury-or-kill-this-buffer)
+              ;; :map notmuch-hello-mode-map
+              ;; ("<mouse-8>" . notmuch-bury-or-kill-this-buffer)
+              :map notmuch-tree-mode-map
+              ("<mouse-8>" . notmuch-bury-or-kill-this-buffer)
+              :map notmuch-show-mode-map
+              ("<mouse-8>" . notmuch-bury-or-kill-this-buffer)))
 
 ;;; lsp-mode
 (use-package lsp
@@ -416,7 +424,7 @@ the current file."
 (use-package perlbrew
   :ensure t
   :config
-  (perlbrew-use "perl-5.30.0"))
+  (perlbrew-use "perl-5.30.2"))
 
 (use-package cperl-mode
   :ensure t
