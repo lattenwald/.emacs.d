@@ -45,11 +45,12 @@
 ;; backup in one place. flat, no tree structure
 (setq backup-directory-alist '(("" . "~/.emacs.d/backup")))
 
-(set-fontset-font "fontset-default" nil
-                  (font-spec :name "Symbola"))
+(when (fboundp 'set-fontset-font)
+  (set-fontset-font "fontset-default" nil
+                    (font-spec :name "Symbola")))
 
 ;;; Loading submodules
-(let ((default-directory  "~/.emacs.d/git/"))
+(let ((default-directory "~/.emacs.d/git/"))
   (normal-top-level-add-subdirs-to-load-path))
 
 ;; treat underscore as word character
